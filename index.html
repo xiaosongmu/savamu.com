@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sava Mu — Recruiting, Run by Builders</title>
+  <meta name="description" content="Engineering, Product, and UX recruiting for US tech companies. Run directly by Dario Sava and XiaoSong Mu." />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #08090C;
+      --surface: #101218;
+      --rule: rgba(255, 255, 255, 0.08);
+      --rule-strong: rgba(255, 255, 255, 0.16);
+      --ink: #F5F2EB;
+      --body: #B8BDC9;
+      --muted: #767C8B;
+      --accent: #E64A2E;
+      --accent-hover: #F25E43;
+      --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Floating Minimal Nav */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 26px clamp(24px, 5vw, 64px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.25s ease, padding 0.25s ease, border-color 0.25s ease;
+      
+    }
+
+    header.scrolled {
+      background: rgba(8, 9, 12, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 18px clamp(24px, 5vw, 64px);
+      
+    }
+
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .mark {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a.nav-text {
+      font-size: 13.5px;
+      color: var(--body);
+      transition: color 0.18s ease;
+    }
+
+    .nav-links a.nav-text:hover {
+      color: var(--ink);
+    }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      color: #FFFFFF;
+      background: var(--accent);
+      padding: 9px 18px;
+      transition: background 0.18s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-hover);
+    }
+
+    /* Full-Viewport Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 120px clamp(24px, 5vw, 64px) 38px;
+      overflow: hidden;
+    }
+
+    /* Edge-bleeding fluted dark glass monolith on far right */
+    .monolith {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: clamp(220px, 31vw, 480px);
+      background: #0A0C11;
+      
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .monolith::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--bg) 0%, rgba(8, 9, 12, 0) 24%);
+    }
+
+    .flutes {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      width: 100%;
+      height: 100%;
+    }
+
+    .flute {
+      border-left: 1px solid rgba(255, 255, 255, 0.04);
+      background: linear-gradient(90deg, rgba(255,255,255,0.028) 0%, rgba(255,255,255,0.004) 48%, rgba(0,0,0,0.32) 100%);
+    }
+
+    .flute:nth-child(even) {
+      background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.008) 52%, rgba(0,0,0,0.4) 100%);
+    }
+
+    .beam {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 42%;
+      width: 3px;
+      background: #FFA791;
+      box-shadow:
+        0 0 12px 2px rgba(230, 74, 46, 0.92),
+        0 0 44px 14px rgba(230, 74, 46, 0.34),
+        0 0 110px 34px rgba(230, 74, 46, 0.14);
+      animation: breathe 7s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.85; }
+      50% { opacity: 1; }
+    }
+
+    .hero-main {
+      position: relative;
+      z-index: 2;
+      margin: auto 0;
+      max-width: 680px;
+      padding: 24px 0;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.1rem, 6.8vw, 5.9rem);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.028em;
+      color: var(--ink);
+      margin-bottom: 30px;
+    }
+
+    .hero-sub {
+      font-size: clamp(1.05rem, 1.45vw, 1.25rem);
+      line-height: 1.58;
+      color: var(--body);
+      max-width: 520px;
+      margin-bottom: 42px;
+    }
+
+    .hero-sub strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 14.5px;
+      font-weight: 600;
+      padding: 15px 28px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .hero-foot {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.18s ease;
+    }
+
+    .scroll-cue:hover {
+      color: var(--ink);
+    }
+
+    .scroll-line {
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    /* Editorial Asymmetric Web Sections */
+    .band {
+      padding: clamp(96px, 14vh, 156px) clamp(24px, 5vw, 64px);
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.36fr) 0.64fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: start;
+    }
+
+    .rail {
+      position: sticky;
+      top: 108px;
+    }
+
+    .rail h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.85rem, 2.8vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .rail p {
+      font-size: 15px;
+      line-height: 1.62;
+      color: var(--body);
+      max-width: 300px;
+    }
+
+    .rail .selectivity {
+      margin-top: 28px;
+      padding-top: 8px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16.5px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    /* Focus List (Web Editorial Index, not 3-box slide) */
+    .focus-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .focus-group-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .role-rows {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .role-rows li {
+      padding: 12px 16px;
+      margin-left: -16px;
+      font-size: clamp(1.08rem, 1.35vw, 1.24rem);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s ease, padding-left 0.2s ease;
+    }
+
+    .role-rows li:hover {
+      background: rgba(255, 255, 255, 0.035);
+      padding-left: 22px;
+    }
+
+    .role-rows li::after {
+      content: "";
+      width: 5px;
+      height: 5px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .role-rows li:hover::after {
+      opacity: 1;
+    }
+
+    /* Partners Editorial Spread */
+    .partners-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    .partner-card {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 28px;
+      align-items: start;
+      padding-top: 8px;
+    }
+
+    .partner-card:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .avatar {
+      width: 112px;
+      height: 112px;
+      object-fit: cover;
+      display: block;
+      background: #0A0B0E;
+      border-radius: 2px;
+    }
+
+    .partner-name {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .partner-role {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .partner-bio {
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: var(--body);
+      max-width: 520px;
+    }
+
+    /* Spacious Contact Moment */
+    .closing {
+      min-height: 56vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(88px, 12vh, 140px) clamp(24px, 5vw, 64px) 40px;
+      background: radial-gradient(circle at 85% 95%, rgba(230, 74, 46, 0.12), transparent 46%);
+    }
+
+    .closing-inner {
+      max-width: 1240px;
+      width: 100%;
+      margin: auto;
+      padding: 24px 0 64px;
+    }
+
+    .closing h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .closing-sub {
+      font-size: 17px;
+      color: var(--body);
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .email-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .email-link {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.4vw, 2rem);
+      color: var(--ink);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 4px;
+      transition: color 0.18s ease;
+    }
+
+    .email-link:hover {
+      color: var(--accent-hover);
+    }
+
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--body);
+      border: none;
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 9px 14px;
+      cursor: pointer;
+      transition: border-color 0.18s ease, color 0.18s ease;
+    }
+
+    .copy-btn:hover {
+      background: rgba(230, 74, 46, 0.16);
+      color: var(--ink);
+    }
+
+    footer {
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+      padding-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    /* Subtle scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 860px) {
+      .monolith {
+        width: 28vw;
+        opacity: 0.45;
+      }
+      .split {
+        grid-template-columns: 1fr;
+      }
+      .rail {
+        position: static;
+      }
+      .rail p {
+        max-width: 100%;
+      }
+      .nav-links a.nav-text {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .monolith {
+        display: none;
+      }
+      .partner-card {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .avatar {
+        width: 84px;
+        height: 84px;
+      }
+      .hero-foot {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="top-nav">
+    <a href="#" class="wordmark">
+      <span class="mark" aria-hidden="true"></span>
+      Sava Mu
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#focus" class="nav-text">Focus</a>
+      <a href="#partners" class="nav-text">Partners</a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Full-Screen Hero -->
+    <section class="hero" aria-label="Introduction">
+      <div class="monolith" aria-hidden="true">
+        <div class="flutes">
+          <div class="flute"></div><div class="flute"></div><div class="flute"></div><div class="flute"></div>
+          <div class="flute"></div><div class="flute"></div><div class="flute"></div><div class="flute"></div>
+          <div class="flute"></div><div class="flute"></div><div class="flute"></div><div class="flute"></div>
+        </div>
+        <div class="beam"></div>
+      </div>
+
+      <div class="hero-main">
+        <div class="eyebrow">Engineering &middot; Product &middot; UX</div>
+        <h1>Recruiting,<br />run by builders.</h1>
+        <p class="hero-sub">
+          We find and vet Engineering, Product, and UX talent for US tech companies.
+          <strong>We built Sava Mu so hiring managers only spend time with people who can actually do the job.</strong>
+        </p>
+        <a href="#contact" class="btn-primary">Get in touch</a>
+      </div>
+
+      <div class="hero-foot">
+        <a href="#focus" class="scroll-cue">
+          <span class="scroll-line" aria-hidden="true"></span>
+          Scroll
+        </a>
+        <span>Dario Sava &middot; XiaoSong Mu</span>
+      </div>
+    </section>
+
+    <!-- Focus (Asymmetric Web Layout) -->
+    <section class="band" id="focus">
+      <div class="split">
+        <div class="rail reveal">
+          <div class="eyebrow">01 &middot; Focus</div>
+          <h2>Engineering, Product, and UX.</h2>
+          <p>
+            We stick to the functions we have actually hired and managed ourselves.
+          </p>
+        </div>
+
+        <div class="focus-groups reveal">
+          <div>
+            <div class="focus-group-label">Engineering</div>
+            <ul class="role-rows">
+              <li>Software Engineers (all domains)</li>
+              <li>Engineering Managers</li>
+              <li>Applied AI &amp; Data Engineers</li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="focus-group-label">Product</div>
+            <ul class="role-rows">
+              <li>0&rarr;1 &amp; Founding PMs</li>
+              <li>Senior &amp; Principal PMs</li>
+              <li>AI PMs (Evals &amp; Agents)</li>
+              <li>Director &amp; VP of Product</li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="focus-group-label">Design &amp; UX</div>
+            <ul class="role-rows">
+              <li>Product Designers</li>
+              <li>Design Engineers (Code + Craft)</li>
+              <li>AI / Agentic UX Designers</li>
+              <li>Staff &amp; Head of Design</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners (Editorial Spread) -->
+    <section class="band" id="partners" style="background: radial-gradient(circle at 12% 50%, rgba(255,255,255,0.025), transparent 55%);">
+      <div class="split">
+        <div class="rail reveal">
+          <div class="eyebrow">02 &middot; Partners</div>
+          <h2>You work directly with us.</h2>
+          <p>
+            Most tech recruiters have never written code, shipped a product, or designed a screen. We run every search ourselves.
+          </p>
+          <p class="selectivity">
+            We work with a small number of teams at a time, at companies we would work at ourselves.
+          </p>
+        </div>
+
+        <div class="partners-stack reveal">
+          <article class="partner-card">
+            <img class="avatar" src="images/xiaosong.jpg" alt="XiaoSong Mu" />
+            <div>
+              <div class="partner-name">XiaoSong Mu</div>
+              <div class="partner-role">Partner &middot; Engineering, Product &amp; UX</div>
+              <p class="partner-bio">
+                Stanford CS. Co-founded Call9 (YC S15), raised $34M, and grew the team past 100 people. Spent the last decade hiring and managing engineers, PMs, and designers at startups and at Toast.
+              </p>
+            </div>
+          </article>
+
+          <article class="partner-card">
+            <img class="avatar" src="images/dario.jpg" alt="Dario Sava" />
+            <div>
+              <div class="partner-name">Dario Sava</div>
+              <div class="partner-role">Partner &middot; Product, AI &amp; Consumer</div>
+              <p class="partner-bio">
+                Harvard EECS. Senior Director of Product at Toast, leading Consumer Product. Former Product Manager at Google Cloud Healthcare &amp; Life Sciences, with published AI research.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <section class="closing" id="contact">
+      <div class="closing-inner reveal">
+        <div class="eyebrow">03 &middot; Contact</div>
+        <h2>Hiring for a hard role?</h2>
+        <p class="closing-sub">Send us a note. It goes straight to Dario and XiaoSong.</p>
+        <div class="email-row">
+          <a href="mailto:hello@savamu.com" class="email-link">hello@savamu.com</a>
+          <button type="button" class="copy-btn" id="copy-email">Copy</button>
+        </div>
+      </div>
+
+      <footer>
+        <span class="wordmark">
+          <span class="mark" aria-hidden="true"></span>
+          Sava Mu
+        </span>
+        <span>savamu.com &nbsp;&middot;&nbsp; US Tech Recruiting</span>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    // Subtle header glass effect on scroll
+    const nav = document.getElementById('top-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 32);
+    }, { passive: true });
+
+    // Clean scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Copy email
+    const copyBtn = document.getElementById('copy-email');
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard?.writeText('hello@savamu.com');
+      copyBtn.textContent = 'Copied';
+      setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+    });
+  </script>
+</body>
+</html>
